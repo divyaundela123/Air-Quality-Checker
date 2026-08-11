@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: aerosense-api
+    env: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: DB_HOST
+        value: YOUR_AIVEN_HOST.aivencloud.com
+      - key: DB_PORT
+        value: "YOUR_PORT"
+      - key: DB_USER
+        value: avnadmin
+      - key: DB_PASSWORD
+        value: YOUR_AIVEN_PASSWORD
+      - key: DB_NAME
+        value: defaultdb
+      - key: DB_SSL
+        value: "true"
+      - key: JWT_SECRET
+        value: aerosense_jwt_secret_key_change_in_production_2024
+      - key: JWT_EXPIRES_IN
+        value: 30d
+      - key: PORT
+        value: "3000"

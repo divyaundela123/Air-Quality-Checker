@@ -1,0 +1,4 @@
+URI: mongodb+srv:****@cluster0.gus43ow.mongodb.net/aerosense?retryWrites=true&w=majority
+❌ DNS resolve failed: queryA ENODATA cluster0.gus43ow.mongodb.net
+   → Your network cannot reach MongoDB Atlas
+^C

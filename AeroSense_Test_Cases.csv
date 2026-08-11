@@ -1,0 +1,311 @@
+Test Case ID,Test Category,Module,Test Case Title,Precondition,Test Steps,Expected Result,Status
+TC001,Selenium,Login Screen,Verify login page loads correctly,App is running on Chrome,"1. Open app URL in Chrome browser","Login page displays with Email field, Password field, Login button, Forgot Password link, Sign Up link",PASS
+TC002,Selenium,Login Screen,Verify valid login with correct credentials,User registered with test@aerosense.com / Test@123,"1. Enter test@aerosense.com in email field 2. Enter Test@123 in password field 3. Click Login button","User is navigated to Dashboard screen, greeting shows user name",PASS
+TC003,Selenium,Login Screen,Verify login button is disabled when fields are empty,App is on login page,"1. Leave email and password fields empty 2. Click Login button","Validation errors shown: 'Email is required' and 'Password is required'",PASS
+TC004,Selenium,Login Screen,Verify invalid email format is rejected,App is on login page,"1. Enter 'invalidemail' in email field 2. Enter any password 3. Click Login","Error message: 'Enter a valid email' appears below email field",PASS
+TC005,Selenium,Login Screen,Verify password field masks characters by default,App is on login page,"1. Click on password field 2. Type any characters","Password characters are hidden as dots/asterisks",PASS
+TC006,Selenium,Login Screen,Verify password visibility toggle works,App is on login page with password entered,"1. Click the eye icon next to password field","Password characters become visible; clicking again hides them",PASS
+TC007,Selenium,Login Screen,Verify Forgot Password link navigates to reset dialog,App is on login page,"1. Click 'Forgot password?' link","Reset Password dialog opens with Email, New Password, Confirm Password fields",PASS
+TC008,Selenium,Login Screen,Verify Sign Up link navigates to Register screen,App is on login page,"1. Click 'Sign up' text link","Register screen opens with Full Name, Email, Password fields",PASS
+TC009,Selenium,Login Screen,Verify error message on wrong password,User registered with test@aerosense.com / Test@123,"1. Enter test@aerosense.com 2. Enter wrongpassword 3. Click Login","Error snackbar shows 'Invalid email or password'",PASS
+TC010,Selenium,Login Screen,Verify login with unregistered email,App is on login page,"1. Enter notregistered@test.com 2. Enter any password 3. Click Login","Error snackbar shows 'Invalid email or password'",PASS
+TC011,Selenium,Register Screen,Verify register page loads correctly,User clicks Sign Up on login page,"1. Click Sign Up link from login page","Register screen displays Full Name, Email, Password fields and Create Account button",PASS
+TC012,Selenium,Register Screen,Verify successful user registration,Register screen is open,"1. Enter 'Test User' in Full Name 2. Enter newuser@test.com in Email 3. Enter Test@123 in Password 4. Click Create Account","User is navigated to Dashboard, record created in Supabase users table",PASS
+TC013,Selenium,Register Screen,Verify full name validation - empty field,Register screen is open,"1. Leave Full Name empty 2. Fill email and password 3. Click Create Account","Error: 'Full Name is required' shown below name field",PASS
+TC014,Selenium,Register Screen,Verify full name minimum length validation,Register screen is open,"1. Enter single character 'A' in Full Name 2. Fill other fields 3. Click Create Account","Error: 'Name must be at least 2 characters' shown",PASS
+TC015,Selenium,Register Screen,Verify email validation on register screen,Register screen is open,"1. Enter 'notvalid' in email 2. Fill other fields 3. Click Create Account","Error: 'Enter a valid email' shown below email field",PASS
+TC016,Selenium,Register Screen,Verify password minimum length on register,Register screen is open,"1. Enter 'abc' (3 chars) in password field 2. Fill other fields 3. Click Create Account","Error: 'Password must be at least 6 characters' shown",PASS
+TC017,Selenium,Register Screen,Verify duplicate email registration rejected,Email already registered in database,"1. Enter already registered email 2. Fill valid name and password 3. Click Create Account","Error snackbar: 'Email already registered'",PASS
+TC018,Selenium,Register Screen,Verify Back to Login link works,Register screen is open,"1. Click 'Back to Login' or 'Log In' link","User is navigated back to Login screen",PASS
+TC019,Selenium,Dashboard Screen,Verify dashboard loads after login,User is logged in,"1. Complete login with valid credentials","Dashboard displays greeting, AQI gauge, quick stats row with Temperature, Humidity, CO2, VOC",PASS
+TC020,Selenium,Dashboard Screen,Verify user greeting shows first name,User logged in as 'Divya Reddy',"1. Navigate to Dashboard tab","Greeting shows 'Hello, Divya 👋'",PASS
+TC021,Selenium,Dashboard Screen,Verify AQI gauge renders with live data,Live sensor data available,"1. Open Dashboard","Syncfusion radial gauge displays AQI value with color-coded needle and status badge",PASS
+TC022,Selenium,Dashboard Screen,Verify status badge color Safe (AQI 0-50),AQI is between 0-50,"1. View Dashboard with AQI <= 50","Status badge shows green color with 'Safe' label",PASS
+TC023,Selenium,Dashboard Screen,Verify status badge color Moderate (AQI 51-100),AQI is between 51-100,"1. View Dashboard with AQI 51-100","Status badge shows yellow/amber with 'Moderate' label",PASS
+TC024,Selenium,Dashboard Screen,Verify status badge color Warning (AQI 101-150),AQI is between 101-150,"1. View Dashboard with AQI 101-150","Status badge shows orange with 'Warning' label",PASS
+TC025,Selenium,Dashboard Screen,Verify status badge color Hazardous (AQI >150),AQI is above 150,"1. View Dashboard with AQI > 150","Status badge shows red with 'Hazardous' label",PASS
+TC026,Selenium,Dashboard Screen,Verify Quick Stats row shows 4 sensor values,Live data available,"1. Scroll to Quick Stats section on Dashboard","Temperature (°C), Humidity (%), CO2 (ppm), VOC (ppb) all displayed in cards",PASS
+TC027,Selenium,Dashboard Screen,Verify Recommendation card displays correct message,AQI status is Safe,"1. Check recommendation card below stats","Recommendation shows 'Air quality is optimal. Enjoy your environment!'",PASS
+TC028,Selenium,Dashboard Screen,Verify Weekly Summary card shows avg AQI 7d,User has at least 2 records,"1. Scroll to bottom of Dashboard","Summary card shows Avg AQI (7d), Total Readings, Best Reading values",PASS
+TC029,Selenium,Dashboard Screen,Verify LIVE badge is visible in top right,App is connected and fetching data,"1. View top right corner of dashboard","Green LIVE badge with timestamp shows current time (HH:mm:ss)",PASS
+TC030,Selenium,Analyze Screen,Verify Analyze screen opens from navigation,User is on Dashboard,"1. Click Analyze tab in bottom nav or ring nav","Analyze screen opens with Live Sensor Readings section",PASS
+TC031,Selenium,Analyze Screen,Verify Refresh button fetches new sensor data,Analyze screen is open,"1. Click the Refresh button","Loading spinner appears, then sensor values update with latest live data",PASS
+TC032,Selenium,Analyze Screen,Verify sensor reading cards display Temperature,Analyze screen with live data,"1. View sensor cards section","Temperature card shows value in °C with comfort label (e.g. Comfortable/Warm/Cold)",PASS
+TC033,Selenium,Analyze Screen,Verify sensor reading cards display Humidity,Analyze screen with live data,"1. View sensor cards section","Humidity card shows value in % with label (Comfortable range/Humid/Dry)",PASS
+TC034,Selenium,Analyze Screen,Verify sensor reading cards display CO2,Analyze screen with live data,"1. View sensor cards section","CO2 card shows value in ppm with label (Good/Elevated/High CO2 level!)",PASS
+TC035,Selenium,Analyze Screen,Verify sensor reading cards display VOC,Analyze screen with live data,"1. View sensor cards section","VOC card shows value in ppb with label (Good/Elevated/High VOC level!)",PASS
+TC036,Selenium,Analyze Screen,Verify Save Analysis button saves to history,Live data is loaded,"1. Click 'Save Analysis to History' button","Loading animation, then snackbar: 'Analysis saved! AQI: X.X - Status', record added to History",PASS
+TC037,Selenium,Analyze Screen,Verify AQI preview card updates on save,Live data available,"1. Click Save Analysis","AQI preview card at top shows current AQI with color gradient background",PASS
+TC038,Selenium,History Screen,Verify History screen opens from navigation,User is on any tab,"1. Click History tab","History screen displays list of saved AQI records sorted newest first",PASS
+TC039,Selenium,History Screen,Verify filter chips display all status options,History screen is open with records,"1. View filter bar at top of history","Filter chips: All, Safe, Moderate, Warning, Hazardous are all visible",PASS
+TC040,Selenium,History Screen,Verify filter All shows all records,History has mixed status records,"1. Click 'All' filter chip","All records display regardless of status",PASS
+TC041,Selenium,History Screen,Verify Safe filter shows only Safe records,History has Safe records,"1. Click 'Safe' filter chip","Only records with Safe status are displayed",PASS
+TC042,Selenium,History Screen,Verify Moderate filter shows only Moderate records,History has Moderate records,"1. Click 'Moderate' filter chip","Only records with Moderate status are displayed",PASS
+TC043,Selenium,History Screen,Verify Warning filter shows only Warning records,History has Warning records,"1. Click 'Warning' filter chip","Only records with Warning status are displayed",PASS
+TC044,Selenium,History Screen,Verify Hazardous filter shows only Hazardous records,History has Hazardous records,"1. Click 'Hazardous' filter chip","Only records with Hazardous status are displayed",PASS
+TC045,Selenium,History Screen,Verify delete single record shows confirmation dialog,History has at least 1 record,"1. Click delete icon on a record","Dialog appears: 'Delete Record?' with Cancel and Delete buttons",PASS
+TC046,Selenium,History Screen,Verify Cancel on delete dialog keeps record,Delete confirmation dialog is open,"1. Click Cancel button","Dialog closes, record remains in list",PASS
+TC047,Selenium,History Screen,Verify confirm delete removes record from list,Delete confirmation dialog is open,"1. Click Delete button","Record is removed from list, snackbar: 'Record deleted'",PASS
+TC048,Selenium,History Screen,Verify Clear All shows confirmation dialog,History has multiple records,"1. Click Clear All icon in top right","Dialog: 'Clear All History?' with Cancel and Clear All buttons",PASS
+TC049,Selenium,History Screen,Verify Clear All removes all records,Clear All confirmation dialog open,"1. Click Clear All button","All records removed, empty state screen shown",PASS
+TC050,Selenium,History Screen,Verify tap on record opens detail bottom sheet,History has records,"1. Tap on a history tile","Bottom sheet slides up showing full AQI details with date/time and sensor values",PASS
+TC051,Selenium,Profile Screen,Verify Profile screen opens from navigation,User is logged in,"1. Click Profile tab","Profile screen shows avatar with initials, name, email chip, phone, stats row",PASS
+TC052,Selenium,Profile Screen,Verify profile initials generated from name,User name is 'Divya Reddy',"1. Open Profile screen","Avatar circle shows 'DR' initials in gradient background",PASS
+TC053,Selenium,Profile Screen,Verify stats row shows Readings count,User has saved records,"1. View stats row on Profile","Readings count shows correct number matching history count",PASS
+TC054,Selenium,Profile Screen,Verify stats row shows Avg AQI,User has at least 1 record,"1. View Avg AQI in stats row","Average AQI value calculated correctly from all records",PASS
+TC055,Selenium,Profile Screen,Verify Personal Information menu item opens Edit Profile,Profile screen is open,"1. Click 'Personal Information' menu item","Edit Profile screen opens with name, email (read-only), phone fields",PASS
+TC056,Selenium,Profile Screen,Verify Notifications menu item opens Notification Settings,Profile screen is open,"1. Click 'Notifications' menu item","Notification Settings screen opens with 4 toggle switches",PASS
+TC057,Selenium,Profile Screen,Verify Privacy & Security menu opens screen,Profile screen is open,"1. Click 'Privacy & Security' menu item","Privacy & Security screen opens with policy sections",PASS
+TC058,Selenium,Profile Screen,Verify Help Center menu opens screen,Profile screen is open,"1. Click 'Help Center' menu item","Help Center screen opens with FAQ items",PASS
+TC059,Selenium,Profile Screen,Verify Settings menu opens Settings screen,Profile screen is open,"1. Click 'Settings' menu item","Settings screen opens with Temperature Unit, Dark Mode, Language, Export Data",PASS
+TC060,Selenium,Profile Screen,Verify Logout button shows confirmation dialog,Profile screen is open,"1. Click 'Log Out' menu item","Dialog: 'Log Out?' with 'Are you sure?' message, Cancel and Log Out buttons",PASS
+TC061,Selenium,Profile Screen,Verify Cancel on logout dialog stays on profile,Logout dialog is open,"1. Click Cancel","Dialog closes, user remains on Profile screen",PASS
+TC062,Selenium,Profile Screen,Verify confirm logout navigates to login screen,Logout dialog is open,"1. Click Log Out button","User is logged out and navigated to Login screen",PASS
+TC063,Selenium,Edit Profile Screen,Verify Edit Profile fields are pre-filled,User has name and phone set,"1. Open Edit Profile","Name field shows current name, email read-only, phone shows current phone",PASS
+TC064,Selenium,Edit Profile Screen,Verify Save Changes updates profile name,Edit Profile screen open,"1. Change name to 'New Name' 2. Click Save Changes","Snackbar: 'Profile updated successfully!', Profile screen shows updated name",PASS
+TC065,Selenium,Edit Profile Screen,Verify phone number can be added,Edit Profile open with empty phone,"1. Enter '+91 9876543210' in phone field 2. Click Save Changes","Phone number saved and appears on Profile screen as green chip",PASS
+TC066,Selenium,Settings Screen,Verify Dark Mode toggle switches theme,Settings screen open,"1. Toggle Dark Mode switch ON","App background changes to dark theme across all screens",PASS
+TC067,Selenium,Settings Screen,Verify Dark Mode toggle switches back to light,Dark mode is ON,"1. Toggle Dark Mode switch OFF","App returns to light theme",PASS
+TC068,Selenium,Settings Screen,Verify Temperature Unit toggles Celsius/Fahrenheit,Settings screen open,"1. Click Temperature Unit row","Temperature unit switches between Celsius and Fahrenheit",PASS
+TC069,Selenium,Settings Screen,Verify Language picker opens bottom sheet,Settings screen open,"1. Click Language row","Bottom sheet opens showing English, తెలుగు, हिन्दी, தமிழ் options",PASS
+TC070,Selenium,Settings Screen,Verify selecting English language updates UI,Language picker is open,"1. Select 'English'","All UI text across app shows in English, flag shows 🇬🇧",PASS
+TC071,Selenium,Settings Screen,Verify selecting Telugu language updates UI,Language picker is open,"1. Select 'తెలుగు (Telugu)'","All UI labels change to Telugu script (e.g. Dashboard = డాష్‌బోర్డ్)",PASS
+TC072,Selenium,Settings Screen,Verify selecting Hindi language updates UI,Language picker is open,"1. Select 'हिन्दी (Hindi)'","All UI labels change to Hindi (e.g. History = इतिहास)",PASS
+TC073,Selenium,Settings Screen,Verify selecting Tamil language updates UI,Language picker is open,"1. Select 'தமிழ் (Tamil)'","All UI labels change to Tamil script (e.g. Profile = சுயவிவரம்)",PASS
+TC074,Selenium,Notification Settings,Verify 4 notification toggles are visible,Notification Settings screen open,"1. Open Notifications from Profile","Status Changes, Danger Alerts, Analysis Saved, Live Sensor Updates toggles shown",PASS
+TC075,Selenium,Notification Settings,Verify Status Changes toggle can be disabled,Notification Settings open,"1. Toggle 'Status Changes' OFF","Toggle switches to OFF state and preference is saved",PASS
+TC076,Selenium,Notification Settings,Verify Send Test Notification button is present,Notification Settings open,"1. View bottom of Notifications screen","'Send Test Notification' button is visible",PASS
+TC077,Selenium,Navigation,Verify bottom navigation has 4 tabs on mobile,App running on mobile viewport,"1. View bottom of screen after login","Bottom nav shows Dashboard, Analyze, History, Profile tabs",PASS
+TC078,Selenium,Navigation,Verify ring navigation visible on web layout,App running on Chrome width >= 700px,"1. View right side of screen","Circular ring nav with 4 color-coded segments visible on right side",PASS
+TC079,Selenium,Navigation,Verify clicking each ring segment navigates correctly,Web layout active,"1. Click each ring segment","Dashboard/Analyze/History/Profile screens open on click",PASS
+TC080,Selenium,Navigation,Verify active tab is highlighted in bottom nav,App on mobile with History tab active,"1. Click History tab","History icon and label highlighted in primary blue color",PASS
+TC081,Appium,Login Screen,Verify login screen renders on Android device,App installed on Android device,"1. Launch AeroSense app on Android","Login screen displays correctly with all UI elements visible",PASS
+TC082,Appium,Login Screen,Verify keyboard appears when email field tapped,App on Android login screen,"1. Tap on Email field","Android soft keyboard appears, email type keyboard shown",PASS
+TC083,Appium,Login Screen,Verify keyboard closes after login button tap,Android device with keyboard open,"1. Tap Login button","Keyboard dismisses, login process begins",PASS
+TC084,Appium,Login Screen,Verify login form scrollable on small screens,Small screen Android device,"1. Open login screen on small device","Form is scrollable and all fields accessible without overlap",PASS
+TC085,Appium,Login Screen,Verify back button on Android login screen,Android device on login screen,"1. Press Android hardware back button","App closes or shows exit confirmation",PASS
+TC086,Appium,Register Screen,Verify register screen renders on Android,Android device,"1. Tap Sign Up from login","Register screen displays correctly with full name, email, password fields",PASS
+TC087,Appium,Register Screen,Verify text input in Full Name field on Android,Android register screen,"1. Tap Full Name field 2. Type 'Test User'","Text 'Test User' appears in field with capitalization",PASS
+TC088,Appium,Register Screen,Verify form submission with valid data on Android,Android register screen filled correctly,"1. Fill all fields validly 2. Tap Create Account","App navigates to Dashboard screen",PASS
+TC089,Appium,Dashboard Screen,Verify dashboard renders correctly on Android,User logged in on Android,"1. Open Dashboard","AQI gauge, stats, recommendation card all render without overflow",PASS
+TC090,Appium,Dashboard Screen,Verify LIVE indicator visible on Android,Android device with internet,"1. View top right of dashboard","LIVE green badge visible with time",PASS
+TC091,Appium,Dashboard Screen,Verify bottom navigation works on Android,App running on Android,"1. Tap each bottom nav item","Each tab switches correctly with smooth animation",PASS
+TC092,Appium,Analyze Screen,Verify sensor cards render on Android,Analyze screen on Android,"1. Navigate to Analyze tab","Temperature, Humidity, CO2, VOC cards display with correct values",PASS
+TC093,Appium,Analyze Screen,Verify Save Analysis works on Android,Analyze screen with live data on Android,"1. Tap Save Analysis button","Snackbar confirmation appears, record saved to history",PASS
+TC094,Appium,History Screen,Verify history list scrolls on Android,Multiple records exist on Android,"1. Navigate to History 2. Scroll down","List scrolls smoothly showing all records",PASS
+TC095,Appium,History Screen,Verify delete swipe / button on Android,Records exist on Android device,"1. Tap delete icon on record","Confirmation dialog appears, record deleted on confirm",PASS
+TC096,Appium,Profile Screen,Verify profile screen layout on Android,User logged in on Android,"1. Navigate to Profile tab","Avatar, name, email chip, stats row, menu items all visible without overflow",PASS
+TC097,Appium,Profile Screen,Verify camera picker bottom sheet on Android,Profile screen on Android,"1. Tap profile avatar","Bottom sheet shows Take a photo and Choose from gallery options",PASS
+TC098,Appium,Profile Screen,Verify logout works on Android,User logged in on Android,"1. Tap Log Out 2. Confirm","User logged out, navigated to Login screen",PASS
+TC099,Appium,Settings Screen,Verify language picker opens on Android,Settings screen on Android,"1. Tap Language row","Language picker bottom sheet appears with 4 language options",PASS
+TC100,Appium,Settings Screen,Verify dark mode toggle works on Android,Settings screen on Android,"1. Toggle Dark Mode ON","Entire app switches to dark background theme",PASS
+TC101,Appium,Notifications,Verify notification appears when app is in background,Android device with app minimized,"1. Save analysis 2. Press home button 3. Wait for notification","Push notification appears in Android notification tray",PASS
+TC102,Appium,Notifications,Verify tapping notification opens app,Android device with notification displayed,"1. Tap on AeroSense notification","App opens and navigates to relevant screen",PASS
+TC103,Appium,Notifications,Verify background AQI check fires via WorkManager,Android device with app closed,"1. Close app completely 2. Wait 15 minutes","Background notification appears in notification tray with current AQI",PASS
+TC104,Appium,Notifications,Verify Danger Alert notification shows for Warning AQI,AQI level triggers Warning status,"1. Save analysis with Warning AQI","High priority notification: '⚠️ AeroSense — Air Quality Warning!'",PASS
+TC105,Appium,Notifications,Verify Hazardous notification appears on critical AQI,AQI > 150,"1. Save analysis with Hazardous AQI","Max priority notification: '🚨 AeroSense — HAZARDOUS Air Quality!'",PASS
+TC106,Load Test,API - Login,Verify login endpoint handles 50 concurrent users,Backend server running,"1. Send 50 simultaneous POST /api/auth/login requests","All 50 requests return response within 3 seconds, no 500 errors",PASS
+TC107,Load Test,API - Register,Verify register endpoint handles 30 concurrent registrations,Backend server running,"1. Send 30 simultaneous POST /api/auth/register with unique emails","All registrations complete within 5 seconds, all rows inserted in Supabase",PASS
+TC108,Load Test,API - Records,Verify GET /api/records handles 100 concurrent requests,50 users logged in each with 10 records,"1. Send 100 simultaneous GET /api/records requests","All requests return correct data within 2 seconds",PASS
+TC109,Load Test,API - Records,Verify POST /api/records handles 100 concurrent saves,100 users authenticated,"1. Send 100 simultaneous POST /api/records requests","All 100 records saved successfully within 5 seconds",PASS
+TC110,Load Test,API - Health,Verify health endpoint responds under high load,Backend running,"1. Send 200 simultaneous GET /health requests","All 200 return HTTP 200 with db_ready=true within 1 second",PASS
+TC111,Load Test,API - Delete,Verify DELETE /api/records/:id under concurrent load,50 users each with 5 records,"1. Send 50 simultaneous DELETE requests","All records deleted correctly with no orphan data",PASS
+TC112,Load Test,Live Sensor,Verify Open-Meteo API calls under repeated refresh,Analyze screen open,"1. Click Refresh 30 times in 60 seconds","API rate limit not exceeded, each call returns valid sensor data",PASS
+TC113,Load Test,Supabase,Verify Supabase handles 500 aqi_records inserts,Database connected,"1. Insert 500 records for 1 user via POST /api/records","All 500 records stored, GET /api/records returns all 500 correctly",PASS
+TC114,Load Test,App Startup,Verify app startup time is within 5 seconds,Chrome browser open,"1. Navigate to app URL and measure load time","App is fully interactive within 5 seconds on normal connection",PASS
+TC115,Load Test,Sync,Verify cloud sync under 200 existing records,User has 200 records in Supabase,"1. Login and wait for sync","All 200 records appear in History within 10 seconds",PASS
+TC116,Load Test,Concurrent Users,Verify 20 simultaneous users can login and view dashboard,20 user accounts exist,"1. Simulate 20 users login and load dashboard simultaneously","All 20 sessions load dashboard correctly without server crash",PASS
+TC117,Load Test,Memory,Verify app doesn't crash with 1000 history records rendered,1000 records in Hive,"1. Open History screen with 1000 records","Screen loads and scrolls without memory crash or freeze",PASS
+TC118,Load Test,Auto Refresh,Verify dashboard auto-refreshes every 30s for 1 hour,App running on Chrome for 60 minutes,"1. Monitor dashboard for 1 hour","Sensor data refreshes every ~30 seconds, no memory leak or crash",PASS
+TC119,Load Test,API - Clear All,Verify DELETE /api/records handles clearing 500 records,User has 500 records,"1. Send DELETE /api/records","All 500 records deleted within 5 seconds, empty response returned",PASS
+TC120,Load Test,Token Refresh,Verify JWT token works across 100 API calls,Valid JWT issued at login,"1. Make 100 sequential authenticated API calls","All 100 calls return valid data without token expiry error",PASS
+TC121,Vulnerability,Authentication,Verify SQL injection in login email field is blocked,App on login screen,"1. Enter ' OR 1=1 -- in email field 2. Click Login","Login fails with 'Invalid email or password', no DB error exposed",PASS
+TC122,Vulnerability,Authentication,Verify SQL injection in login password field is blocked,App on login screen,"1. Enter ' OR '1'='1 in password field 2. Click Login","Login fails securely, no unauthorized access",PASS
+TC123,Vulnerability,Authentication,Verify JWT token is required for protected endpoints,No auth token present,"1. Send GET /api/records without Authorization header","HTTP 401 returned: 'No token provided'",PASS
+TC124,Vulnerability,Authentication,Verify expired JWT token is rejected,Token older than 30 days,"1. Send API request with expired JWT token","HTTP 401 returned: 'Invalid or expired token'",PASS
+TC125,Vulnerability,Authentication,Verify tampered JWT token is rejected,Valid JWT token,"1. Modify payload of JWT token 2. Send API request","HTTP 401 returned: 'Invalid or expired token'",PASS
+TC126,Vulnerability,Authentication,Verify password is stored as bcrypt hash in Supabase,New user registered,"1. Check users table in Supabase for password column","Password column shows bcrypt hash (starts with $2a$12$), NOT plaintext",PASS
+TC127,Vulnerability,Authentication,Verify brute force protection - 10 failed logins,App on login screen,"1. Attempt login with wrong password 10 times consecutively","Each attempt returns 401, no account lockout bypass possible",PASS
+TC128,Vulnerability,Authorization,Verify user cannot access other user's records,Two users registered,"1. Login as User A 2. Try to GET /api/records using User A's token","Only User A's records returned, User B's records not accessible",PASS
+TC129,Vulnerability,Authorization,Verify user cannot delete other user's records,Two users with records,"1. Login as User A 2. Try DELETE /api/records/:id with User B's record ID","HTTP 404 returned: 'Record not found' - not deleted",PASS
+TC130,Vulnerability,Input,Verify XSS attack in Full Name field is prevented,Register screen,"1. Enter <script>alert('xss')</script> as full name 2. Register","Name stored as plain text, no script executes in any screen",PASS
+TC131,Vulnerability,Input,Verify XSS in email field is prevented,Register screen,"1. Enter <img src=x onerror=alert(1)>@test.com as email","Email validation rejects input as invalid format",PASS
+TC132,Vulnerability,Input,Verify overlong input does not crash the server,Login screen,"1. Enter 10000 character string in email field 2. Click Login","Server returns validation error, no crash or timeout",PASS
+TC133,Vulnerability,Transport,Verify Supabase connection uses HTTPS,Network traffic inspection,"1. Monitor network tab in Chrome DevTools while app makes API calls","All Supabase calls use https:// (port 443), no plain HTTP",PASS
+TC134,Vulnerability,Transport,Verify backend API key not exposed in frontend code,Inspect app JS bundle,"1. Search compiled JS/HTML for 'service_role' or 'SUPABASE_KEY'","No Supabase service_role key found in client-side code",PASS
+TC135,Vulnerability,Transport,Verify CORS policy only allows known origins,Backend server running,"1. Send API request from unauthorized origin","Request rejected or server responds with CORS error to unauthorized domain",PASS
+TC136,Vulnerability,Data,Verify deleted records are fully removed from Supabase,Record exists in DB,"1. Delete a record via app 2. Check Supabase table","Record row no longer present in aqi_records table",PASS
+TC137,Vulnerability,Data,Verify user data isolation in Supabase,Two registered users,"1. Query users table with User A's token","Only User A's user row accessible, no other user data returned",PASS
+TC138,Vulnerability,Data,Verify sensitive fields not returned in API responses,Login successful,"1. Inspect JSON response of POST /api/auth/login","Response contains id, name, email and token only - no password hash returned",PASS
+TC139,Vulnerability,Session,Verify token cleared from storage on logout,User logged in on Chrome,"1. Logout 2. Check browser localStorage/SharedPreferences","auth_token and is_logged_in=false after logout",PASS
+TC140,Vulnerability,Session,Verify session does not persist after token deletion,User token manually deleted,"1. Delete token from storage 2. Refresh app","App redirects to Login screen, no automatic re-authentication",PASS
+TC141,Validation,Login Form,Verify email field accepts valid email format,Login screen,"1. Enter valid@email.com 2. Fill password","No validation error on email field",PASS
+TC142,Validation,Login Form,Verify email field rejects missing @ symbol,Login screen,"1. Enter 'invalidemail.com' 2. Click Login","Error: 'Enter a valid email'",PASS
+TC143,Validation,Login Form,Verify email field rejects missing domain,Login screen,"1. Enter 'user@' 2. Click Login","Error: 'Enter a valid email'",PASS
+TC144,Validation,Login Form,Verify email is case-insensitive at login,User registered with Test@Email.com,"1. Login with test@email.com (lowercase)","Login succeeds - email matched case-insensitively",PASS
+TC145,Validation,Login Form,Verify whitespace trimmed from email field,Login screen,"1. Enter '  test@email.com  ' with spaces 2. Click Login","Login succeeds - spaces trimmed before validation",PASS
+TC146,Validation,Register Form,Verify name field accepts letters and spaces,Register screen,"1. Enter 'John Doe' in Full Name","Field accepts input without error",PASS
+TC147,Validation,Register Form,Verify email field accepts plus addressing,Register screen,"1. Enter 'user+tag@gmail.com' as email","Email accepted as valid format",PASS
+TC148,Validation,Register Form,Verify password with exactly 6 chars is accepted,Register screen,"1. Enter exactly 6 character password 'Test12'","Password accepted, no validation error",PASS
+TC149,Validation,Register Form,Verify password with 5 chars is rejected,Register screen,"1. Enter 'Test1' (5 chars) as password","Error: 'Password must be at least 6 characters'",PASS
+TC150,Validation,Reset Password,Verify new password must match confirm password,Reset Password dialog open,"1. Enter different values in New Password and Confirm Password 2. Click Reset","Error: 'Passwords do not match'",PASS
+TC151,Validation,Reset Password,Verify new password minimum length in reset dialog,Reset Password dialog open,"1. Enter '123' in New Password field 2. Click Reset","Error: 'Minimum 6 characters'",PASS
+TC152,Validation,Reset Password,Verify email required in reset password dialog,Reset Password dialog open,"1. Clear email field 2. Click Reset","Error: 'Email is required'",PASS
+TC153,Validation,Reset Password,Verify reset password fails for unregistered email,Reset Password dialog,"1. Enter nonexistent@test.com 2. Enter valid passwords 3. Click Reset","Error snackbar: 'No account found with that email'",PASS
+TC154,Validation,Edit Profile,Verify name cannot be saved empty in Edit Profile,Edit Profile screen,"1. Clear name field 2. Click Save Changes","Error snackbar: 'Name cannot be empty'",PASS
+TC155,Validation,Edit Profile,Verify email field is read-only in Edit Profile,Edit Profile screen,"1. Try to click and edit email field","Field is not editable, lock icon visible",PASS
+TC156,Validation,AQI Calculation,Verify AQI formula Safe range (CO2=400 VOC=10 Temp=25 Humidity=50),"AQI = (400*0.05)+(10*0.2)+0+0=22","1. Check AQI with safe sensor values","AQI calculated as 22, status = Safe",PASS
+TC157,Validation,AQI Calculation,Verify AQI formula Moderate range (CO2=1000 VOC=100 Temp=30 Humidity=70),"AQI = (1000*0.05)+(100*0.2)+0+0=70","1. Check AQI with moderate sensor values","AQI = 70, status = Moderate",PASS
+TC158,Validation,AQI Calculation,Verify temperature penalty applied above 35°C,CO2=400 VOC=10 Temp=38°C,"1. Check AQI calculation with temp > 35","AQI includes +30 penalty for high temperature",PASS
+TC159,Validation,AQI Calculation,Verify humidity penalty applied above 80%,CO2=400 VOC=10 Humidity=85%,"1. Check AQI with humidity > 80","AQI includes +10 penalty for high humidity",PASS
+TC160,Validation,AQI Calculation,Verify AQI clamped at 500 maximum,Extremely high CO2 and VOC values,"1. Calculate AQI with CO2=5000 VOC=1000","AQI value does not exceed 500",PASS
+TC161,Unit Test,MockAiService,Verify getStatus returns Safe for AQI <= 50,MockAiService available,"1. Call MockAiService.getStatus(25)","Returns 'Safe'",PASS
+TC162,Unit Test,MockAiService,Verify getStatus returns Moderate for AQI 51-100,MockAiService available,"1. Call MockAiService.getStatus(75)","Returns 'Moderate'",PASS
+TC163,Unit Test,MockAiService,Verify getStatus returns Warning for AQI 101-150,MockAiService available,"1. Call MockAiService.getStatus(125)","Returns 'Warning'",PASS
+TC164,Unit Test,MockAiService,Verify getStatus returns Hazardous for AQI > 150,MockAiService available,"1. Call MockAiService.getStatus(200)","Returns 'Hazardous'",PASS
+TC165,Unit Test,MockAiService,Verify getStatus boundary - exactly 50 is Safe,MockAiService available,"1. Call MockAiService.getStatus(50)","Returns 'Safe'",PASS
+TC166,Unit Test,MockAiService,Verify getStatus boundary - exactly 51 is Moderate,MockAiService available,"1. Call MockAiService.getStatus(51)","Returns 'Moderate'",PASS
+TC167,Unit Test,MockAiService,Verify getStatus boundary - exactly 150 is Warning,MockAiService available,"1. Call MockAiService.getStatus(150)","Returns 'Warning'",PASS
+TC168,Unit Test,MockAiService,Verify getStatus boundary - exactly 151 is Hazardous,MockAiService available,"1. Call MockAiService.getStatus(151)","Returns 'Hazardous'",PASS
+TC169,Unit Test,MockAiService,Verify calculateAqi returns 0 for all-zero inputs,MockAiService available,"1. Call calculateAqi(temp:0 humidity:0 co2:0 voc:0)","Returns 0.0",PASS
+TC170,Unit Test,MockAiService,Verify calculateAqi adds CO2 contribution correctly,MockAiService available,"1. Call calculateAqi(temp:25 humidity:50 co2:1000 voc:0)","Returns 50.0 (1000 * 0.05)",PASS
+TC171,Unit Test,MockAiService,Verify calculateAqi adds VOC contribution correctly,MockAiService available,"1. Call calculateAqi(temp:25 humidity:50 co2:0 voc:100)","Returns 20.0 (100 * 0.2)",PASS
+TC172,Unit Test,MockAiService,Verify getStatusColor returns green for Safe,MockAiService available,"1. Call MockAiService.getStatusColor('Safe')","Returns Color(0xFF4CAF50)",PASS
+TC173,Unit Test,MockAiService,Verify getStatusColor returns amber for Moderate,MockAiService available,"1. Call MockAiService.getStatusColor('Moderate')","Returns Color(0xFFFFC107)",PASS
+TC174,Unit Test,MockAiService,Verify getStatusColor returns orange for Warning,MockAiService available,"1. Call MockAiService.getStatusColor('Warning')","Returns Color(0xFFFF9800)",PASS
+TC175,Unit Test,MockAiService,Verify getStatusColor returns red for Hazardous,MockAiService available,"1. Call MockAiService.getStatusColor('Hazardous')","Returns Color(0xFFF44336)",PASS
+TC176,Unit Test,MockAiService,Verify getStatusIcon returns check_circle for Safe,MockAiService available,"1. Call MockAiService.getStatusIcon('Safe')","Returns Icons.check_circle",PASS
+TC177,Unit Test,MockAiService,Verify getStatusIcon returns dangerous for Hazardous,MockAiService available,"1. Call MockAiService.getStatusIcon('Hazardous')","Returns Icons.dangerous",PASS
+TC178,Unit Test,MockAiService,Verify getRecommendation for Safe status,MockAiService available,"1. Call MockAiService.getRecommendation('Safe')","Returns 'Air quality is optimal. Enjoy your environment!'",PASS
+TC179,Unit Test,MockAiService,Verify getRecommendation for Hazardous status,MockAiService available,"1. Call MockAiService.getRecommendation('Hazardous')","Returns evacuation warning message",PASS
+TC180,Unit Test,AppStrings,Verify AppStrings returns correct English strings,AppStrings(AppLanguage.english) created,"1. Call strings.dashboard","Returns 'Dashboard'",PASS
+TC181,Unit Test,AppStrings,Verify AppStrings returns correct Telugu strings,AppStrings(AppLanguage.telugu) created,"1. Call strings.dashboard","Returns 'డాష్‌బోర్డ్'",PASS
+TC182,Unit Test,AppStrings,Verify AppStrings returns correct Hindi strings,AppStrings(AppLanguage.hindi) created,"1. Call strings.history","Returns 'इतिहास'",PASS
+TC183,Unit Test,AppStrings,Verify AppStrings returns correct Tamil strings,AppStrings(AppLanguage.tamil) created,"1. Call strings.profile","Returns 'சுயவிவரம்'",PASS
+TC184,Unit Test,AppStrings,Verify statusLabel translates Safe in Telugu,AppStrings(AppLanguage.telugu),"1. Call strings.statusLabel('Safe')","Returns 'సురక్షితం'",PASS
+TC185,Unit Test,AppStrings,Verify statusLabel translates Hazardous in Hindi,AppStrings(AppLanguage.hindi),"1. Call strings.statusLabel('Hazardous')","Returns 'खतरनाक'",PASS
+TC186,Unit Test,AqiProvider,Verify initial records list is empty,AqiProvider initialized,"1. Check provider.records on init","Returns empty list []",PASS
+TC187,Unit Test,AqiProvider,Verify isLoading is false initially,AqiProvider initialized,"1. Check provider.isLoading on init","Returns false",PASS
+TC188,Unit Test,AqiProvider,Verify hasLiveData returns false when temp is 0,AqiProvider with _liveTemp = 0,"1. Check provider.hasLiveData","Returns false",PASS
+TC189,Unit Test,AqiProvider,Verify hasLiveData returns true when temp is set,AqiProvider with _liveTemp = 30.0,"1. Check provider.hasLiveData","Returns true",PASS
+TC190,Unit Test,AqiProvider,Verify weeklyAvgAqi calculates correctly for 3 records,3 records with AQI 30 60 90,"1. Check provider.weeklyAvgAqi","Returns 60.0",PASS
+TC191,Unit Test,AqiProvider,Verify latestRecord returns most recent record,Records exist sorted by timestamp,"1. Check provider.latestRecord","Returns record with most recent timestamp",PASS
+TC192,Unit Test,AqiProvider,Verify addRecord creates record with correct AQI,Provider with live data temp=25 hum=50 co2=400 voc=10,"1. Call addRecord with those values","Record created with AQI = 22.0, status = Safe",PASS
+TC193,Unit Test,AqiProvider,Verify deleteRecord removes from records list,Provider with 3 records,"1. Call deleteRecord(records[0])","records list length decreases by 1",PASS
+TC194,Unit Test,AqiProvider,Verify clearAllRecords empties list,Provider with 5 records,"1. Call clearAllRecords()","records list is empty, latestRecord is null",PASS
+TC195,Unit Test,AuthProvider,Verify isLoggedIn is false initially,Fresh AuthProvider,"1. Check provider.isLoggedIn","Returns false",PASS
+TC196,Unit Test,AuthProvider,Verify errorMessage is null initially,Fresh AuthProvider,"1. Check provider.errorMessage","Returns null",PASS
+TC197,Unit Test,AuthProvider,Verify _isOfflineError detects 'Cannot reach' message,AuthProvider,"1. Call _isOfflineError('Cannot reach the server')","Returns true",PASS
+TC198,Unit Test,AuthProvider,Verify _isOfflineError returns false for auth error,AuthProvider,"1. Call _isOfflineError('Invalid email or password')","Returns false",PASS
+TC199,Unit Test,AuthProvider,Verify logout clears isLoggedIn flag,AuthProvider with active session,"1. Call provider.logout()","isLoggedIn becomes false, currentUserEmail becomes empty",PASS
+TC200,Unit Test,API Endpoint,Verify POST /api/auth/register returns 201 on success,Backend running with clean DB,"1. POST /api/auth/register with unique email","HTTP 201 returned with token and user object",PASS
+TC201,Unit Test,API Endpoint,Verify POST /api/auth/register returns 409 on duplicate email,User already registered,"1. POST /api/auth/register with existing email","HTTP 409 returned: 'Email already registered'",PASS
+TC202,Unit Test,API Endpoint,Verify POST /api/auth/register returns 400 if name missing,Backend running,"1. POST /api/auth/register without name field","HTTP 400 returned: 'name, email and password are required'",PASS
+TC203,Unit Test,API Endpoint,Verify POST /api/auth/login returns 200 with valid creds,User registered,"1. POST /api/auth/login with valid email and password","HTTP 200 with token and user object",PASS
+TC204,Unit Test,API Endpoint,Verify POST /api/auth/login returns 401 with wrong password,User registered,"1. POST /api/auth/login with wrong password","HTTP 401: 'Invalid email or password'",PASS
+TC205,Unit Test,API Endpoint,Verify GET /api/auth/me returns user info with valid token,User logged in with valid JWT,"1. GET /api/auth/me with Bearer token","HTTP 200 with user id, name, email, created_at",PASS
+TC206,Unit Test,API Endpoint,Verify GET /api/auth/me returns 401 without token,No token provided,"1. GET /api/auth/me without Authorization header","HTTP 401: 'No token provided'",PASS
+TC207,Unit Test,API Endpoint,Verify PUT /api/auth/profile updates name,User authenticated,"1. PUT /api/auth/profile with name='New Name'","HTTP 200: message='Profile updated', name='New Name'",PASS
+TC208,Unit Test,API Endpoint,Verify PUT /api/auth/reset-password updates password,User registered,"1. PUT /api/auth/reset-password with email and new_password","HTTP 200: 'Password reset successful'",PASS
+TC209,Unit Test,API Endpoint,Verify GET /api/records returns empty array for new user,New user with no records,"1. GET /api/records with valid token","HTTP 200: records=[], count=0",PASS
+TC210,Unit Test,API Endpoint,Verify POST /api/records saves record to Supabase,User authenticated,"1. POST /api/records with valid payload","HTTP 201: 'Record saved', record appears in aqi_records table",PASS
+TC211,Unit Test,API Endpoint,Verify GET /api/records returns saved records,User with 3 saved records,"1. GET /api/records","HTTP 200: records array with 3 items sorted newest first",PASS
+TC212,Unit Test,API Endpoint,Verify DELETE /api/records/:id removes record,User has record with known ID,"1. DELETE /api/records/:id","HTTP 200: 'Record deleted', record absent from Supabase",PASS
+TC213,Unit Test,API Endpoint,Verify DELETE /api/records clears all user records,User has 5 records,"1. DELETE /api/records","HTTP 200: deleted=5, all records removed from Supabase",PASS
+TC214,Unit Test,API Endpoint,Verify GET /health returns db_ready=true,Supabase connected,"1. GET /health","HTTP 200: status=ok, db_ready=true, db_type='Supabase (PostgreSQL)'",PASS
+TC215,Unit Test,API Endpoint,Verify POST /api/records returns 400 if id missing,User authenticated,"1. POST /api/records without id field","HTTP 400: 'id, aqi_score and status are required'",PASS
+TC216,Unit Test,API Endpoint,Verify POST /api/records returns 401 without token,No authorization,"1. POST /api/records without Authorization header","HTTP 401: 'No token provided'",PASS
+TC217,Unit Test,API Endpoint,Verify DELETE /api/records/:id returns 404 for wrong id,User authenticated,"1. DELETE /api/records/nonexistentid","HTTP 404: 'Record not found'",PASS
+TC218,Unit Test,API Endpoint,Verify PUT /api/auth/profile returns 400 if name < 2 chars,User authenticated,"1. PUT /api/auth/profile with name='A'","HTTP 400: 'Name must be at least 2 characters'",PASS
+TC219,Unit Test,API Endpoint,Verify PUT /api/auth/reset-password returns 404 for unknown email,Unknown email,"1. PUT /api/auth/reset-password with nonexistent@test.com","HTTP 404: 'No account found with that email'",PASS
+TC220,Unit Test,Supabase,Verify users table has correct columns in Supabase,Supabase project connected,"1. Query SELECT column_name FROM information_schema.columns WHERE table_name='users'","Columns: id, name, email, password, phone, created_at all exist",PASS
+TC221,Unit Test,Supabase,Verify aqi_records table has correct columns,Supabase project connected,"1. Query columns of aqi_records table","Columns: id, user_id, aqi_score, status, temperature, humidity, co2, voc, recorded_at, created_at all present",PASS
+TC222,Unit Test,Supabase,Verify user_settings table exists with correct columns,Supabase project connected,"1. Query columns of user_settings table","Columns: user_id, language, dark_mode, temperature_unit, notif_* columns all present",PASS
+TC223,Unit Test,Supabase,Verify email uniqueness constraint on users table,Two registrations with same email,"1. INSERT duplicate email into users","PostgreSQL unique constraint violation returned",PASS
+TC224,Unit Test,Supabase,Verify CASCADE delete - deleting user removes their records,User with 5 records deleted,"1. DELETE user from users table 2. Check aqi_records","All 5 aqi_records for that user_id are also deleted",PASS
+TC225,Unit Test,Supabase,Verify indexes exist on aqi_records table,Supabase DB connected,"1. Query pg_indexes for aqi_records","idx_aqi_user_date and idx_aqi_user_status indexes present",PASS
+TC226,Load Test,Response Time,Verify login API responds within 500ms,Backend running normally,"1. Time POST /api/auth/login response","Response time < 500ms under normal load",PASS
+TC227,Load Test,Response Time,Verify dashboard sensor data loads within 3 seconds,App on Chrome with internet,"1. Measure time from login to sensor data visible","Sensor values appear within 3 seconds",PASS
+TC228,Load Test,Response Time,Verify history screen loads within 2 seconds for 50 records,User has 50 records,"1. Navigate to History tab and measure load time","All 50 records visible within 2 seconds",PASS
+TC229,Load Test,Response Time,Verify Save Analysis button responds within 1 second,Live data loaded,"1. Click Save Analysis and measure time to snackbar","Snackbar appears within 1 second",PASS
+TC230,Load Test,Response Time,Verify Refresh button updates data within 3 seconds,Analyze screen open,"1. Click Refresh and time until new values displayed","Sensor values updated within 3 seconds",PASS
+TC231,Selenium,Responsive,Verify web layout activates at width >= 700px,Chrome browser,"1. Set browser width to 750px","Ring navigation visible, two-column layout active on Analyze screen",PASS
+TC232,Selenium,Responsive,Verify mobile layout activates at width < 700px,Chrome browser,"1. Set browser width to 600px","Bottom navigation bar visible, single-column layout active",PASS
+TC233,Selenium,Responsive,Verify login page shows two-column layout on web,Chrome width >= 700px,"1. Open login page at 800px width","Left branding panel and right form panel shown side by side",PASS
+TC234,Selenium,Responsive,Verify login page shows single column on mobile,Chrome width < 700px,"1. Open login page at 400px width","Single column form layout, no side branding panel",PASS
+TC235,Selenium,Responsive,Verify profile page scrolls correctly on mobile,Mobile viewport,"1. Scroll Profile screen from top to bottom","All sections visible: header, stats, account, support, logout",PASS
+TC236,Selenium,Localization,Verify date format changes with language selection,Telugu language selected,"1. View history records with Telugu language","Date shows as e.g. 'శుక్ర, 07 ఆగ 2026' instead of 'Fri, 07 Aug 2026'",PASS
+TC237,Selenium,Localization,Verify LIVE badge translates to Telugu,Telugu language selected,"1. View top right LIVE badge with Telugu selected","Badge shows 'లైవ్' instead of 'LIVE'",PASS
+TC238,Selenium,Localization,Verify Summary header translates in dashboard,Hindi language selected,"1. View weekly summary section with Hindi selected","Section header shows 'सारांश' instead of 'Summary'",PASS
+TC239,Selenium,Localization,Verify all navigation labels translate,Tamil language selected,"1. Check bottom nav or ring nav labels","Dashboard=டாஷ்போர்ட், Analyze=பகுப்பாய்வு, History=வரலாறு, Profile=சுயவிவரம்",PASS
+TC240,Selenium,Localization,Verify Privacy & Security screen fully translated,Telugu selected,"1. Open Profile > Privacy & Security","All headings and body text appear in Telugu script",PASS
+TC241,Selenium,Localization,Verify Help Center FAQ fully translated to Hindi,Hindi selected,"1. Open Profile > Help Center with Hindi","FAQ questions and answers appear in Hindi",PASS
+TC242,Selenium,Localization,Verify Add Phone Number button translates,Telugu language active on Profile,"1. View profile with no phone and Telugu selected","Button shows 'ఫోన్ నంబర్ జోడించు' instead of 'Add phone number'",PASS
+TC243,Appium,Orientation,Verify app handles landscape orientation on Android,Android device,"1. Rotate device to landscape","App adapts layout, no content cut off or overflow",PASS
+TC244,Appium,Offline,Verify offline login with cached credentials,Previously logged in user, now offline,"1. Disable internet 2. Open app 3. Login","Login succeeds using locally cached credentials",PASS
+TC245,Appium,Offline,Verify offline registration shows correct message,Device offline on register screen,"1. Disable internet 2. Complete registration form 3. Submit","User registered locally, navigates to dashboard",PASS
+TC246,Appium,Offline,Verify history screen shows locally cached records when offline,Records exist in Hive cache,"1. Disable internet 2. Open History","Locally cached records display, no crash",PASS
+TC247,Selenium,DB Status Banner,Verify DB status banner not shown when logged out,App on login screen,"1. View login page","No database status banner visible on login/register screens",PASS
+TC248,Selenium,DB Status Banner,Verify DB status banner shows connected when Supabase OK,User logged in, Supabase connected,"1. View top of dashboard on web","No error banner, connection is healthy",PASS
+TC249,Selenium,Sync,Verify cloud sync icon spins during sync,Dashboard with sync in progress,"1. Trigger sync by clicking sync icon","Spinning progress indicator visible during sync",PASS
+TC250,Selenium,Sync,Verify records added on another device appear after sync,Same user account on two browsers,"1. Add record on Browser A 2. Trigger sync on Browser B","Record from Browser A appears in Browser B's history",PASS
+TC251,Vulnerability,Input,Verify extra long name is handled gracefully,Register screen,"1. Enter 1000-character string as Full Name 2. Register","Server accepts or truncates, no crash or 500 error",PASS
+TC252,Vulnerability,Headers,Verify API returns proper Content-Type header,Any API endpoint,"1. Make GET /health request 2. Inspect response headers","Content-Type: application/json returned",PASS
+TC253,Vulnerability,Auth,Verify token from User A cannot be used by User B,Two separate user accounts,"1. Login as User A, get token 2. Use token to access /api/records","Returns only User A records, User B cannot access with same token",PASS
+TC254,Validation,Sensor Data,Verify temperature label shows Comfortable for 18-28°C,Temperature = 22.0°C,"1. View temperature sensor card","Label: 'Comfortable'",PASS
+TC255,Validation,Sensor Data,Verify temperature label shows Warm for 28-35°C,Temperature = 30.0°C,"1. View temperature sensor card","Label: 'Warm'",PASS
+TC256,Validation,Sensor Data,Verify temperature label shows Cold for below 18°C,Temperature = 15.0°C,"1. View temperature sensor card","Label: 'Cold'",PASS
+TC257,Validation,Sensor Data,Verify temperature label shows High penalty for above 35°C,Temperature = 38.0°C,"1. View temperature sensor card","Label: 'High — +30 AQI penalty'",PASS
+TC258,Validation,Sensor Data,Verify CO2 label shows Good for below 800ppm,CO2 = 600 ppm,"1. View CO2 sensor card","Label: 'Good'",PASS
+TC259,Validation,Sensor Data,Verify CO2 label shows Elevated for 800-1200ppm,CO2 = 1000 ppm,"1. View CO2 sensor card","Label: 'Elevated'",PASS
+TC260,Validation,Sensor Data,Verify CO2 label shows High CO2 level for above 1200ppm,CO2 = 1500 ppm,"1. View CO2 sensor card","Label: 'High CO₂ level!'",PASS
+TC261,Validation,Sensor Data,Verify VOC label shows Good for below 300ppb,VOC = 150 ppb,"1. View VOC sensor card","Label: 'Good'",PASS
+TC262,Validation,Sensor Data,Verify VOC label shows Elevated for 300-500ppb,VOC = 400 ppb,"1. View VOC sensor card","Label: 'Elevated'",PASS
+TC263,Validation,Sensor Data,Verify VOC label shows High VOC for above 500ppb,VOC = 600 ppb,"1. View VOC sensor card","Label: 'High VOC level!'",PASS
+TC264,Validation,Sensor Data,Verify humidity label shows Comfortable for 40-60%,Humidity = 50%,"1. View humidity sensor card","Label: 'Comfortable range'",PASS
+TC265,Validation,Sensor Data,Verify humidity label shows Humid for above 80%,Humidity = 85%,"1. View humidity sensor card","Label: 'High — +10 AQI penalty'",PASS
+TC266,Selenium,Forgot Password,Verify password visibility toggle in New Password field,Reset Password dialog open,"1. Click eye icon on New Password field","Password characters toggle between visible and hidden",PASS
+TC267,Selenium,Forgot Password,Verify password visibility toggle in Confirm Password field,Reset Password dialog open,"1. Click eye icon on Confirm Password field","Characters toggle between visible and hidden",PASS
+TC268,Selenium,Forgot Password,Verify Cancel closes reset dialog without changes,Reset Password dialog open,"1. Click Cancel button","Dialog closes, login form unchanged",PASS
+TC269,Selenium,Forgot Password,Verify successful password reset shows success snackbar,Valid email and matching passwords entered,"1. Fill all fields correctly 2. Click Reset Password","Green snackbar: 'Password reset! Please log in again.'",PASS
+TC270,Selenium,Splash Screen,Verify splash screen shows before app loads,App first launched,"1. Launch app URL in browser","AeroSense logo/splash briefly visible before navigating to login or dashboard",PASS
+TC271,Selenium,Help Center,Verify 4 FAQ items visible in Help Center,Help Center screen open,"1. Open Profile > Help Center","What is AQI?, How are scores calculated?, What do statuses mean?, How to connect sensor? all visible",PASS
+TC272,Selenium,Help Center,Verify FAQ answers are visible below questions,Help Center screen open,"1. View any FAQ item","Question and full answer text visible below it",PASS
+TC273,Selenium,Privacy Screen,Verify 3 policy sections shown in Privacy & Security,Privacy screen open,"1. Open Profile > Privacy & Security","Local Storage, Authentication, Sensor Permissions sections visible",PASS
+TC274,Selenium,Privacy Screen,Verify privacy screen has back navigation,Privacy screen open,"1. Click back arrow","Returns to Profile screen",PASS
+TC275,Unit Test,AqiProvider,Verify weeklyAvgAqi returns 0 when no records,Provider with empty records,"1. Check provider.weeklyAvgAqi with empty list","Returns 0.0",PASS
+TC276,Unit Test,AqiProvider,Verify latestStatus defaults to Safe when no record,Provider with no latest record,"1. Check provider.latestStatus","Returns 'Safe'",PASS
+TC277,Unit Test,AqiProvider,Verify latestAqi defaults to 0 when no record,Provider with no latest record,"1. Check provider.latestAqi","Returns 0.0",PASS
+TC278,Unit Test,AuthProvider,Verify currentUserName returns empty string initially,Fresh AuthProvider,"1. Check provider.currentUserName","Returns '' (empty string)",PASS
+TC279,Unit Test,AuthProvider,Verify currentUserEmail returns empty string initially,Fresh AuthProvider,"1. Check provider.currentUserEmail","Returns '' (empty string)",PASS
+TC280,Unit Test,AuthProvider,Verify isDbReady is false initially,Fresh AuthProvider not connected,"1. Check provider.isDbReady","Returns false",PASS
+TC281,Selenium,Navigation,Verify IndexedStack preserves tab state,User on History tab with filter applied,"1. Switch to Dashboard tab 2. Switch back to History","Filter selection preserved, not reset",PASS
+TC282,Selenium,Navigation,Verify no duplicate screens in navigation stack,Multiple tab switches performed,"1. Press hardware back after several tab switches","Only 1 screen in stack, no duplicate Dashboard/History layers",PASS
+TC283,Load Test,Pagination,Verify history list renders 100 records without freeze,100 records exist,"1. Open History with 100 records","All records render with smooth scroll, no UI freeze",PASS
+TC284,Vulnerability,Data,Verify aqi_score cannot be negative in DB,Backend running,"1. POST /api/records with aqi_score = -10","Record accepted by API but AQI stored clamped to 0 minimum",PASS
+TC285,Vulnerability,Data,Verify status field only accepts valid enum values,Backend running,"1. POST /api/records with status='Unknown'","Supabase check constraint rejects invalid status value",PASS
+TC286,Appium,Back Navigation,Verify back button from Dashboard on Android,Android device on Dashboard,"1. Press back button from Dashboard","App shows exit confirmation or closes gracefully",PASS
+TC287,Appium,Deep Link,Verify re-opening app resumes last session,User logged in, app backgrounded,"1. Press home 2. Re-open app from recents","App resumes on Dashboard, no re-login required",PASS
+TC288,Selenium,Export Data,Verify Export Data shows coming soon snackbar,Settings screen open,"1. Click Export Data","Snackbar shows 'Data export coming soon!'",PASS
+TC289,Validation,Reset Password,Verify reset password with valid data updates login,User registered with old password,"1. Reset password 2. Login with new password","Login succeeds with new password",PASS
+TC290,Validation,Reset Password,Verify old password no longer works after reset,User just reset their password,"1. Attempt login with old password","Login fails with 'Invalid email or password'",PASS
+TC291,Selenium,Accessibility,Verify all interactive buttons have tooltip or label,App on web layout,"1. Hover over icon buttons (refresh, delete, sync)","Tooltips appear with descriptive text",PASS
+TC292,Selenium,Accessibility,Verify color is not the only indicator of AQI status,Dashboard with any AQI status,"1. View AQI status indicators","Status label text shown alongside color for accessibility",PASS
+TC293,Appium,Memory,Verify app does not leak memory after 30 minutes,App running on Android for 30 min,"1. Monitor memory usage over 30 minutes","Memory stays stable, no continuous growth",PASS
+TC294,Load Test,Simultaneous,Verify app handles user login + sensor fetch simultaneously,App launched and logging in,"1. Login while Open-Meteo fetch is in progress","Both complete successfully without conflict or crash",PASS
+TC295,Selenium,Error Handling,Verify app shows error when backend is offline,Backend server stopped,"1. Try to login with backend stopped","Error: 'Cannot reach the server. Is the backend running on port 3000?'",PASS
+TC296,Selenium,Error Handling,Verify live sensor error shown when Open-Meteo fails,Simulate API timeout,"1. Disconnect internet 2. Wait for refresh cycle","OFFLINE badge appears in top right instead of LIVE",PASS
+TC297,Selenium,Error Handling,Verify sync error shown when cloud sync fails,Backend offline after login,"1. Try cloud sync with backend offline","Sync error state shown in history screen header",PASS
+TC298,Vulnerability,API,Verify API does not return stack traces in production errors,Backend running,"1. Trigger a 500 error intentionally","Response contains only {'error': 'message'}, no stack trace exposed",PASS
+TC299,Selenium,UI,Verify AQI gauge animates on first load,Dashboard loading for first time,"1. Open Dashboard with live data","Gauge needle animates from 0 to actual AQI value over 1.5 seconds",PASS
+TC300,Selenium,UI,Verify all screens load without horizontal scroll overflow,All screens tested,"1. Check each screen at standard width","No horizontal scrollbar appears on any screen, content fits viewport",PASS
+TC301,Appium,Notification,Verify notification channel created on first app run,Fresh Android install,"1. Install and open app for first time","aqi_alerts and live_sensor notification channels created in Android settings",PASS
+TC302,Appium,Notification,Verify notification permission requested on Android 13+,Android 13 device fresh install,"1. Launch app first time","System permission dialog: Allow AeroSense to send notifications?",PASS
+TC303,Selenium,History,Verify empty state shown when no records exist,New user with no history,"1. Open History tab","Empty state message: 'No History Yet' displayed",PASS
+TC304,Selenium,History,Verify empty state shown when filter matches 0 records,Records exist but none match selected filter,"1. Select 'Hazardous' filter when only Safe records exist","Message: 'No records match the selected filter'",PASS
+TC305,Unit Test,AqiRecord,Verify AqiRecord model stores all fields correctly,AqiRecord created,"1. Create AqiRecord with all fields","id, aqiScore, status, temperature, humidity, co2, voc, timestamp all accessible",PASS
+TC306,Load Test,Hive,Verify Hive persists records across app restarts,10 records saved to Hive,"1. Close app 2. Reopen app 3. Check History","All 10 records still present from local Hive storage",PASS
+TC307,Selenium,Analyze,Verify web two-column layout on Analyze screen,Chrome width >= 700px,"1. Open Analyze screen on web","Left column: AQI preview + recommendation + save button. Right column: Overview panel",PASS
+TC308,Selenium,Analyze,Verify last updated timestamp shown on Analyze screen,Sensor data fetched at least once,"1. View bottom of Analyze screen","'Updated HH:mm:ss • auto 30s' timestamp visible",PASS
+TC309,Validation,API,Verify GET /api/records/latest returns single record,User has multiple records,"1. GET /api/records/latest","Returns single most recent record object, not array",PASS
+TC310,Vulnerability,Endpoint,Verify password reset endpoint requires new_password field,Backend running,"1. PUT /api/auth/reset-password without new_password","HTTP 400: 'email and new_password are required'",PASS

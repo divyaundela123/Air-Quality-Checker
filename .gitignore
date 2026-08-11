@@ -1,0 +1,87 @@
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.fvm/
+.pub-cache/
+.pub/
+build/
+*.iml
+*.ipr
+*.iws
+.idea/
+*.log
+
+# Android
+android/.gradle
+android/local.properties
+android/app/google-services.json
+android/key.properties
+**/android/**/gradle-wrapper.jar
+**/android/.gradle
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/android/**/GeneratedPluginRegistrant.java
+
+# iOS
+**/ios/**/*.mode1v3
+**/ios/**/*.mode2v3
+**/ios/**/*.moved-aside
+**/ios/**/*.pbxuser
+**/ios/**/*.perspectivev3
+**/ios/**/DerivedData/
+**/ios/**/*.hmap
+**/ios/**/*.ipa
+**/ios/**/*.xcscmblueprint
+**/ios/**/.generated/
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/ephemeral/
+**/ios/Flutter/app.flx
+**/ios/Flutter/app.zip
+**/ios/Flutter/flutter_assets/
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/ServiceDefinitions.json
+**/ios/Runner/GeneratedPluginRegistrant.*
+Podfile.lock
+
+# Web
+lib/generated_plugin_registrant.dart
+
+# Node.js backend
+backend/node_modules/
+backend/.env
+backend/aerosense.db
+backend/fix-rls.js
+backend/test-connection.js
+backend/fix-mongodb-firewall.bat
+
+# Hive local database files
+*.hive
+*.lock
+
+# Sensitive / local files
+*.env
+.env
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Build artifacts
+*.apk
+*.aab
+*.ipa

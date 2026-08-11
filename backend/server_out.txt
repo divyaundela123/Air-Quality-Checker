@@ -1,0 +1,16 @@
+╔══════════════════════════════════════════════╗
+║      AeroSense API  —  Auto DB Mode  v5      ║
+╚══════════════════════════════════════════════╝
+🔍 Detecting available database...
+
+   Trying MongoDB SRV URI...
+   Trying MongoDB Direct URI...
+📦 MongoDB unavailable — using SQLite (local)...
+✅ SQLite ready: C:\Users\hp\flutter project\air_quality\backend\aerosense.db
+✅ Tables: users, aqi_records, user_settings
+🎉 Database ready — SQLite
+
+🚀 AeroSense API  →  http://localhost:3000
+   Health : http://localhost:3000/health
+   DB     : 💾 SQLite (local)
+
