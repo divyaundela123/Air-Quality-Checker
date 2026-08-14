@@ -45,7 +45,7 @@ class _CalculateScreenState extends State<CalculateScreen>
     setState(() => _isAnalyzing = true);
     await Future.delayed(const Duration(milliseconds: 600));
     if (!mounted) return;
-    await provider.addRecord(
+    await provider.addRecordFromValues(
       temperature: provider.latestTemperature,
       humidity: provider.latestHumidity,
       co2: provider.latestCo2,

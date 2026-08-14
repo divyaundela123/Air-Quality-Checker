@@ -50,7 +50,6 @@ android/key.properties
 Podfile.lock
 
 # Web
-lib/generated_plugin_registrant.dart
 
 # Node.js backend
 backend/node_modules/

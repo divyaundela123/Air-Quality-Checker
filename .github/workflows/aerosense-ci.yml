@@ -58,7 +58,7 @@ jobs:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           PORT: 3000
         run: |
-          nohup node server.js > /tmp/server.log 2>&1 &
+          nohup node server-local.js > /tmp/server.log 2>&1 &
           echo "Server PID=$!"
           sleep 10
           echo "--- server log ---"
@@ -223,7 +223,7 @@ jobs:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           PORT: 3000
         run: |
-          nohup node server.js > /tmp/server.log 2>&1 &
+          nohup node server-local.js > /tmp/server.log 2>&1 &
           sleep 10
 
       - name: Wait for server
@@ -326,7 +326,7 @@ jobs:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           PORT: 3000
         run: |
-          nohup node server.js > /tmp/server.log 2>&1 &
+          nohup node server-local.js > /tmp/server.log 2>&1 &
           sleep 10
 
       - name: Wait for server
@@ -444,7 +444,7 @@ jobs:
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           PORT: 3000
         run: |
-          nohup node server.js > /tmp/server.log 2>&1 &
+          nohup node server-local.js > /tmp/server.log 2>&1 &
           sleep 10
 
       - name: Wait for server

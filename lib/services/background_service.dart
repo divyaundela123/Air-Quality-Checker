@@ -9,6 +9,7 @@
 // ============================================================
 
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:workmanager/workmanager.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -35,24 +36,31 @@ void callbackDispatcher() {
 /// Initialise WorkManager and schedule the periodic task.
 /// Call once from main() — safe to call multiple times (idempotent).
 Future<void> initBackgroundService() async {
-  await Workmanager().initialize(
-    callbackDispatcher,
-  );
+  if (kIsWeb || (defaultTargetPlatform != TargetPlatform.android && defaultTargetPlatform != TargetPlatform.iOS)) {
+    debugPrint('ℹ️ WorkManager background service skipped (non-mobile platform: $defaultTargetPlatform)');
+    return;
+  }
+  try {
+    await Workmanager().initialize(
+      callbackDispatcher,
+    );
 
-  await Workmanager().registerPeriodicTask(
-    _taskTag,
-    _taskName,
-    frequency: const Duration(minutes: 15),
-    existingWorkPolicy: ExistingPeriodicWorkPolicy.keep,
-    // Removed battery and network constraints — check happens inside with try/catch
-    constraints: Constraints(
-      networkType: NetworkType.connected,
-    ),
-    backoffPolicy: BackoffPolicy.linear,
-    backoffPolicyDelay: const Duration(minutes: 5),
-  );
+    await Workmanager().registerPeriodicTask(
+      _taskTag,
+      _taskName,
+      frequency: const Duration(minutes: 15),
+      existingWorkPolicy: ExistingPeriodicWorkPolicy.keep,
+      constraints: Constraints(
+        networkType: NetworkType.connected,
+      ),
+      backoffPolicy: BackoffPolicy.linear,
+      backoffPolicyDelay: const Duration(minutes: 5),
+    );
 
-  debugPrint('✅ WorkManager background AQI task scheduled (every 15 min)');
+    debugPrint('✅ WorkManager background AQI task scheduled (every 15 min)');
+  } catch (e) {
+    debugPrint('WorkManager init failed: $e');
+  }
 }
 
 // ─────────────────────────────────────────────────────────────

@@ -1,0 +1,65 @@
+{
+  "model_type": "RandomForestRegressor",
+  "all_models": {
+    "rf_mae": 4.46,
+    "gb_mae": 4.51
+  },
+  "features": [
+    "temperature",
+    "humidity",
+    "pm25",
+    "pm10",
+    "no2",
+    "so2",
+    "o3",
+    "co",
+    "current_aqi",
+    "hour",
+    "day_of_week",
+    "month",
+    "hour_sin",
+    "hour_cos",
+    "month_sin",
+    "month_cos",
+    "temp_hum_ratio",
+    "pm25_no2",
+    "pm10_co"
+  ],
+  "n_features": 19,
+  "train_samples": 6400,
+  "test_samples": 1600,
+  "real_data_fraction": 0.0,
+  "metrics": {
+    "mae": 4.46,
+    "rmse": 6.76,
+    "r2": 0.974,
+    "accuracy_within_5_aqi": 71.3,
+    "accuracy_within_10_aqi": 88.9
+  },
+  "feature_description": {
+    "temperature": "Air temperature (\u00b0C) \u2014 real sensor",
+    "humidity": "Relative humidity (%) \u2014 real sensor",
+    "pm25": "PM2.5 fine particles (\u00b5g/m\u00b3) \u2014 OpenAQ/CPCB",
+    "pm10": "PM10 particles (\u00b5g/m\u00b3) \u2014 OpenAQ/CPCB",
+    "no2": "Nitrogen dioxide (\u00b5g/m\u00b3) \u2014 OpenAQ/CPCB",
+    "so2": "Sulphur dioxide (\u00b5g/m\u00b3) \u2014 OpenAQ/CPCB",
+    "o3": "Ozone (\u00b5g/m\u00b3) \u2014 OpenAQ/CPCB",
+    "co": "Carbon monoxide (\u00b5g/m\u00b3) \u2014 OpenAQ/CPCB",
+    "current_aqi": "Current AQI computed from NAQI breakpoints",
+    "hour": "Hour of day (0\u201323)",
+    "day_of_week": "Day of week (0=Mon)",
+    "month": "Month (1\u201312)",
+    "hour_sin/cos": "Cyclical encoding of hour",
+    "month_sin/cos": "Cyclical encoding of month",
+    "temp_hum_ratio": "temperature / (humidity+1)",
+    "pm25_no2": "PM2.5 \u00d7 NO2 / 1000 interaction",
+    "pm10_co": "PM10 \u00d7 CO / 100000 interaction"
+  },
+  "aqi_thresholds": {
+    "Safe": "0\u201350",
+    "Moderate": "51\u2013100",
+    "Warning": "101\u2013150",
+    "Hazardous": "151+"
+  },
+  "trained_at": "2026-08-12T21:42:00.250468"
+}

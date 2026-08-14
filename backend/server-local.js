@@ -248,6 +248,56 @@ app.delete('/api/records', authenticate, (req, res) => {
   res.json({ message: 'All records cleared', deleted: result.changes });
 });
 
+// ── ML PREDICTION PROXY ────────────────────────────────────────
+const fetch = require('node-fetch');
+const ML_API_URL = process.env.ML_API_URL || 'http://localhost:5000';
+
+app.post('/api/ml/predict', authenticate, async (req, res) => {
+  try {
+    const { temperature, humidity, co2, voc } = req.body;
+    if (temperature == null || humidity == null || co2 == null || voc == null)
+      return res.status(400).json({ error: 'temperature, humidity, co2 and voc are required' });
+
+    const mlRes = await fetch(`${ML_API_URL}/ml/predict`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ temperature, humidity, co2, voc }),
+      timeout: 5000,
+    });
+    const mlData = await mlRes.json();
+    res.json({ ...mlData, source: 'python_ml_api' });
+  } catch {
+    // Rule-based fallback
+    const { temperature = 28, humidity = 60, co2 = 500, voc = 100 } = req.body;
+    const calcAqi = (t, h, c, v) => Math.min(Math.max((c*0.05)+(v*0.2)+(t>35?30:0)+(h>80?10:0), 0), 500);
+    const getStatus = a => a<=50?'Safe':a<=100?'Moderate':a<=150?'Warning':'Hazardous';
+    const cur = calcAqi(temperature, humidity, co2, voc);
+    const pred = Math.min(cur * 1.03 + 1.5, 500);
+    const diff = parseFloat((pred - cur).toFixed(1));
+    res.json({
+      current_aqi: parseFloat(cur.toFixed(1)),
+      predicted_aqi: parseFloat(pred.toFixed(1)),
+      prediction_horizon: '1 hour',
+      current_status: getStatus(cur), predicted_status: getStatus(pred),
+      trend: Math.abs(diff)<3?'stable':diff>0?'worsening':'improving',
+      change: `${diff>0?'+':''}${diff} AQI`, confidence: 0.72, confidence_pct: '72%',
+      alerts: [{ level:'info', message:'ℹ️ Prediction based on rule model (ML API offline).' }],
+      forecast_3h: [1,2,3].map(h=>({ hour:`+${h}h`, predicted_aqi:parseFloat(Math.min(cur+diff*h*0.6,500).toFixed(1)), status:getStatus(cur+diff*h*0.6) })),
+      inputs: { temperature, humidity, co2, voc }, source: 'rule_based_fallback', mae: 5.0,
+    });
+  }
+});
+
+app.get('/api/ml/health', async (req, res) => {
+  try {
+    const r = await fetch(`${ML_API_URL}/ml/health`, { timeout: 3000 });
+    const d = await r.json();
+    res.json({ ml_api: 'online', ...d });
+  } catch {
+    res.json({ ml_api: 'offline', model_loaded: false });
+  }
+});
+
 // ── START ──────────────────────────────────────────────────────
 app.listen(PORT, () => {
   console.log(`🚀 AeroSense API running on http://localhost:${PORT}`);
